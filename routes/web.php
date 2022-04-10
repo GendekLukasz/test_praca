@@ -1,8 +1,9 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\CompaniesController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ContactsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +15,14 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-Route::get('/', [PagesController::class, 'index']);
+Route::get('/', [CompaniesController::class, 'listOfCompanies']);
+Route::get('/add_company', [CompaniesController::class, 'add']);
+Route::get('/edit_company/{id}', [CompaniesController::class, 'edit']);
+Route::get('/delete/{id}', [CompaniesController::class, 'delete']);
+Route::get('/contacts/{id}', [ContactsController::class, 'listOfCompanyContacts']);
+
+Route::post('/edit', [CompaniesController::class, 'editSave']);
+Route::post('/add', [CompaniesController::class, 'addSave']);
 
 Route::get('/main', function () {
     return view('pages.main'); //test
